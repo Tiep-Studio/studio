@@ -1,0 +1,28 @@
+---
+title: Nuôi thỏ
+summary: Góc nhỏ này viết về nghề thỏ và chăn nuôi thỏ ổn định và những điều học được từ nghề.
+introduction: |
+  Mê con thỏ, thích nuôi thỏ. Nhưng chỉ dám nuôi chơi chơi để lấy kinh nghiệm viết thành các nội dung hay để lại, hoặc là bài sưu tầm được.
+
+  Nếu thấy hay? [Liên hệ ngay](/contact).
+permalink: presentations/index.html
+---
+{%- assign featured = collections.presentation | includes: 'data.tags','featured' -%}
+{%- assign selected = featured | reverse %}
+{%- include 'section'
+  section_id: 'featured'
+  section_title: 'Kinh nghiệm chọn lọc'
+  section_scrollable: true
+  items: selected
+  items_size: '16rem'
+  items_component: 'card'
+  card_image_color: true
+-%}
+{%- assign appearances = collections.event | select: 'data.participant',true -%}
+{%- include 'section'
+  section_id: 'events'
+  section_title: 'Những kinh nghiệm sưu tầm'
+  items: appearances
+  items_limit: 10
+  item_modifier: 'inline'
+-%}

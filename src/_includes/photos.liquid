@@ -1,0 +1,16 @@
+<figure class="align-{{ alignment | default: 'none' }}">
+  <div class="photos" style="--columns: {{ columns | default: photos.size }}">
+  {%- for photo in photos -%}
+    {%- include 'image' with photo.url
+      preset: image_preset
+      alt: photo.alt
+      class: image_class
+    -%}
+  {%- endfor -%}
+  </div>
+{%- if caption -%}
+  <figcaption>
+    {{ caption | markdownify }}
+  </figcaption>
+{%- endif -%}
+</figure>

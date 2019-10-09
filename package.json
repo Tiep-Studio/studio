@@ -1,0 +1,80 @@
+{
+  "name": "tiepz.com",
+  "version": "4.0.0",
+  "description": "The personal website of Paul Robert Lloyd",
+  "keywords": [
+    "indieweb",
+    "personal-website"
+  ],
+  "author": "Paul Robert Lloyd",
+  "license": "SEE LICENSE IN LICENSE",
+  "homepage": "https://github.com/tiepz/tiepz-v4#readme",
+  "repository": "github:tiepz/tiepz-v4",
+  "bugs": "https://github.com/tiepz/tiepz-v4/issues",
+  "scripts": {
+    "prebuild": "rm -rf www && mkdir -p www/assets",
+    "build:files": "eleventy --config lib/eleventy.config.js --quiet",
+    "build:scripts": "rollup --config lib/rollup.config.js",
+    "build:styles": "postcss src/assets/styles/app.css -o www/assets/styles/app.css --config lib/postcss.config.js",
+    "build": "npm run build:styles && npm run build:scripts && npm run build:files",
+    "watch:files": "eleventy --config lib/eleventy.config.js --quiet --serve",
+    "watch:scripts": "rollup --config lib/rollup.config.js --watch",
+    "watch:styles": "postcss src/assets/styles/app.css -o www/assets/styles/app.css --config lib/postcss.config.js --watch",
+    "watch": "npm-run-all --parallel watch:*",
+    "lint:markdown": "markdownlint src/**/*.md",
+    "lint:scripts": "xo src/**/*.js",
+    "lint:styles": "stylelint src/**/*.css",
+    "lint": "npm-run-all lint:*",
+    "debug": "DEBUG=* npx eleventy"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^0.8.2",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^2.0.1",
+    "color": "^3.1.0",
+    "cssnano": "^4.1.10",
+    "html-minifier": "^4.0.0",
+    "lodash": "^4.17.11",
+    "markdown-it": "^8.4.2",
+    "markdown-it-abbr": "^1.0.4",
+    "markdown-it-anchor": "^5.0.0",
+    "markdown-it-attrs": "^2.3.2",
+    "markdown-it-deflist": "^2.0.3",
+    "markdown-it-footnote": "^3.0.1",
+    "markdown-it-mentions": "^1.0.0",
+    "markdown-it-table-of-contents": "^0.4.4",
+    "node-fetch": "^2.3.0",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^6.1.2",
+    "postcss-color-mod-function": "^3.0.0",
+    "postcss-custom-media": "^7.0.8",
+    "postcss-custom-selectors": "^5.1.2",
+    "postcss-easy-import": "^3.0.0",
+    "postcss-extend-rule": "^2.0.0",
+    "postcss-logical": "^3.0.0",
+    "postcss-media-minmax": "^4.0.0",
+    "rollup": "^1.10.1",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-node-resolve": "^4.2.3",
+    "rollup-plugin-terser": "^4.0.4",
+    "sanitize-html": "^1.20.0",
+    "string-to-color": "^2.0.1",
+    "uslug": "^1.0.4"
+  },
+  "devDependencies": {
+    "markdownlint-cli": "^0.15.0",
+    "stylelint": "^10.0.1",
+    "stylelint-config-standard": "^18.3.0",
+    "stylelint-order": "^3.0.0",
+    "xo": "^0.24.0"
+  },
+  "xo": {
+    "space": true,
+    "envs": "browser",
+    "ignores": [
+      "www/**"
+    ],
+    "rules": {
+      "camelcase": "warn"
+    }
+  }
+}

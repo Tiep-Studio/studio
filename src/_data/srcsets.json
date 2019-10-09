@@ -1,0 +1,20 @@
+{
+  "widths": [320, 640, 960, 1280, 1600, 1920],
+  "presets": {
+    "default": {
+      "sizes": "100vw",
+      "width": 720
+    },
+    "supporting": {
+      "sizes": "50vw",
+      "width": 480
+    },
+    "card": {
+      "width": 360
+    },
+    "thumbnail": {
+      "sizes": "20vw",
+      "width": 240
+    }
+  }
+}

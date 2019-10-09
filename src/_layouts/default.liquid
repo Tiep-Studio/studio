@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en-gb" prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset="utf-8">
+  <meta property="og:title" content="{% if title != '' %}{{ title | markdownify: 'inline' | strip_html }}{% else %}{{ app.title }}{% endif %}">
+  <meta property="og:description" name="description" content="{% if summary %}{{ summary | markdownify | strip_html | strip_newlines | strip }}{% else %}{{ app.description }}{% endif %}">
+  <meta property="og:url" content="{% if url %}{{ url }}{% else %}{{ page.url | prepend: app.url | pretty }}{% endif %}">
+{%- if image -%}
+  <meta property="og:image" content="https://res.cloudinary.com/tiepz/image/fetch/c_fill%2Cf_auto%2Cq_auto%2Cw_1200%2Ch_630/{{ app.url }}{{ image }}">
+  <meta name="twitter:card" content="summary_large_image">
+{%- else -%}
+  <meta property="og:image" content="{{ app.icon | prepend: app.url }}">
+  <meta name="twitter:card" content="summary">
+{%- endif -%}
+  <meta name="twitter:site" content="@tiepz">
+  <meta name="theme-color" content="{{ app.theme_color }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="{% if hidden == true %}noindex{% else %}index{% endif %}, follow">
+
+  <link rel="dns-prefetch" href="https://res.cloudinary.com">
+  <link rel="alternate" href="/feed.xml" type="application/atom+xml" title="RSS (Atom) Feed">
+  <link rel="alternate" href="/feed.json" type="application/json" title="JSON Feed">
+  <link rel="canonical" href="{% if canonical.url %}{{ canonical.url }}{% else %}{{ page.url | prepend: app.url | pretty }}{% endif %}">
+  <link rel="manifest" href="/app.webmanifest">
+  <link rel="apple-touch-icon" href="{{ app.icon }}" type="image/png">
+  <link rel="authorization_endpoint" href="https://indieauth.com/auth">
+  <link rel="token_endpoint" href="https://tokens.indieauth.com/token">
+  <link rel="pgpkey" href="/key.txt">
+  <link rel="microsub" href="https://aperture.p3k.io/microsub/32">
+  <link rel="micropub" href="https://sitewriter.net/tiepz.com/micropub">
+  <link rel="webmention" href="https://webmention.io/tiepz.com/webmention">
+  <link rel="me" href="https://mastodon.social/@tiepz">
+  <link rel="stylesheet" href="/assets/styles/app.css">
+
+  <style>
+    :root {
+    {%- if style.color-accent -%}
+      {%- assign accent = style.color-accent -%}
+    {%- elsif date -%}
+      {%- assign accent = date | colorify -%}
+    {%- else -%}
+      {%- assign accent = app.accent_color -%}
+    {%- endif -%}
+      --color-accent-light: {{ accent | contrastify: 'black' }};
+      --color-accent-dark: {{ accent | contrastify: 'white' }};
+    {%- for var in style -%}
+      {%- unless var[0] == 'color-accent' -%}
+      --{{ var[0]}}: {{ var[1] }};
+      {%- endunless -%}
+    {%- endfor -%}
+    }
+  </style>
+
+  <script src="/assets/scripts/app.js" async></script>
+  <script nonce="cGxsb3lk">
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.register('/serviceworker.js');
+      if (navigator.serviceWorker.controller) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.controller.postMessage({
+            command: 'trimCaches'
+          });
+        });
+      }
+    }
+  </script>
+
+  <title>{% if type != 'homepage' %}{{ title | markdownify: 'inline' | strip_html }} – {% endif %}{{ app.title }}</title>
+</head>
+<body data-type="{{ type }}">
+{%- include 'banner' -%}
+<main class="main{% if vocab %} | {% for root in vocab %} h-{{ root }}{% endfor %}{% endif %}">
+  <div class="main__container">
+  {%- block 'main' -%}
+    {{ layoutContent }}
+  {%- endblock -%}
+  </div>
+</main>
+{%- include 'contentinfo' -%}
+</body>
+</html>

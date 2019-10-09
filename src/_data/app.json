@@ -1,0 +1,22 @@
+{
+  "title": "Sakai Tieppu Studio",
+  "short_title": "TIEP",
+  "description": "Cá nhân Phạm Xuân Tiếp, công việc, gia đình và những điều học được.",
+  "url": "https://tieppu.ga",
+  "domain": "tieppu.ga",
+  "theme_color": "#212227",
+  "accent_color": "#20e",
+  "background_color": "#fff",
+  "favicon": "/images/app.ico",
+  "icon": "/images/app.png",
+  "author": {
+    "name": "Phạm Xuân Tiếp",
+    "url": "https://tieppu.ga",
+    "email": "noreply@tieppu.ga",
+    "avatar": "https://gravatar.com/avatar/5fe9ea954bc315f9215e087b87489f20?s=512"
+  },
+  "token": {
+    "mapbox": "pk.eyJ1IjoicGF1bHJvYmVydGxsb3lkIiwiYSI6Ik54cHBhS0UifQ.bNN4HG8gg9JMj_Dr_hkdLg",
+    "ombdapi": "e2e2ef5c"
+  }
+}
